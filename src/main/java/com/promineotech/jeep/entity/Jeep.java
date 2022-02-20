@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 
 public class Jeep {
-  private Long moedlPK;
+  private Long modelPK;
   private JeepModel modelID;
   private String trimLevel;
   private int numDoors;
