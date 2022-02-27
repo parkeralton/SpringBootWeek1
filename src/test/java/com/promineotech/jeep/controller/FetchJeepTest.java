@@ -24,7 +24,7 @@ import com.promineotech.jeep.entity.JeepModel;
 @ActiveProfiles("test")
 @Sql(scripts = {
     "classpath:flyway/migrations/V1.0__Jeep_Schema.sql",
-    "classpath:flyway/migrations/V1.1__Jeep_Schema.sql"},
+    "classpath:flyway/migrations/V1.1__Jeep_Data.sql"},
     config = @SqlConfig(encoding = "utf-8"))
 class FetchJeepTest {
 
@@ -45,9 +45,12 @@ class FetchJeepTest {
         HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
     
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-    
+    List<Jeep> actual = response.getBody();
     List<Jeep> expected = buildExpected();
-    assertThat(response.getBody()).isEqualTo(expected);
+    
+    //actual.forEach(jeep -> jeep.setModelPK(null));
+    
+    assertThat(actual).isEqualTo(expected);
   
   }
 
